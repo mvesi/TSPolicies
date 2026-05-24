@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction Sync</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #0b132b;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+            padding: 40px 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+        .logo {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 40px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .links-container {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .nav-link {
+            display: block;
+            padding: 14px;
+            color: #4ed9b7;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            border: 1px solid rgba(78, 217, 183, 0.3);
+            border-radius: 6px;
+            transition: all 0.25s ease;
+            background: transparent;
+        }
+        .nav-link:hover {
+            background-color: #4ed9b7;
+            color: #0b132b;
+            border-color: #4ed9b7;
+            box-shadow: 0 0 15px rgba(78, 217, 183, 0.4);
+            transform: translateY(-2px);
+        }
+        .nav-link:active {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <img src="data:image/png;base64,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" alt="Transaction Sync Logo" class="logo">
+        
+        <div class="links-container">
+            <a href="TS_PrivacyPolicy.html" class="nav-link">Privacy Policy</a>
+            <a href="TS_TOS.html" class="nav-link">Terms of Service</a>
+        </div>
+    </div>
+
+</body>
+</html>
